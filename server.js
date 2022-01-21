@@ -4,6 +4,7 @@ const https = require('https');
 const express = require('express');
 const helmet = require('helmet');
 const passport = require('passport');
+const morgan = require('morgan');
 const { Strategy } = require('passport-google-oauth20');
 const cookieSession = require('cookie-session');
 const { verify } = require('crypto');
@@ -46,7 +47,7 @@ passport.deserializeUser((id, done) => {
 });
 
 const app = express();
-
+app.use(morgan('combined'));
 app.use(helmet());
 
 app.use(cookieSession({
